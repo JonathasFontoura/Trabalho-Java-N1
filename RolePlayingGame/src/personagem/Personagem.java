@@ -1,13 +1,13 @@
 package personagem;
 
-public class Personagem {
+public abstract class Personagem {
 	
 	private int pontosDeVida;
 	private int defesa;
 	private int defesaMagica;
 	private String nome;
 	
-	public Personagem(String nome, int pontosDeVida, int defesa, int defesaMagica) {
+	protected Personagem(String nome, int pontosDeVida, int defesa, int defesaMagica) {
 		
 		this.nome = nome;
 		this.pontosDeVida = pontosDeVida;

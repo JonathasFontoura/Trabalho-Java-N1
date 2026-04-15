@@ -1,12 +1,12 @@
 package inimigo;
 
-public class Inimigo {
+public abstract class Inimigo {
 
 	private int pontosDeVida;
 	private int defesa;
 	private int defesaMagica;
 	
-	public Inimigo(int pontosDeVida, int defesa, int defesaMagica) {
+	protected Inimigo(int pontosDeVida, int defesa, int defesaMagica) {
 		
 		this.pontosDeVida = pontosDeVida;
 		this.defesa = defesa;
