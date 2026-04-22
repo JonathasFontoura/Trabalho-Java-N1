@@ -1,7 +1,6 @@
 package batalha;
 
 import java.util.Scanner;
-import batalha.Combate;
 
 import personagem.Personagem;
 import personagem.Arqueiro;
@@ -18,6 +17,7 @@ public class Main {
 	public static int pontosDeVida;
 	public static int defesa;
 	public static int defesaMagica;
+	public static boolean batalha;
 	
 	public static int precisao;
 	public static int forca;
@@ -35,7 +35,7 @@ public class Main {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println("Definição de personagens...");
+		System.out.println("Definição de personagens...\n===================================\n");
 		
 		System.out.print("Digite o nome do personagem: ");
 		nome = scanner.next();
@@ -50,7 +50,7 @@ public class Main {
 		defesaMagica = scanner.nextInt();
 		
 		
-		System.out.println("Defina a classe do seu personagem.");
+		System.out.println("\n\nDefina a classe do seu personagem.\n");
 		System.out.println("Digite 1 para Arquerio.");
 		System.out.println("Digite 2 para Guerreiro.");
 		System.out.println("Digite 3 para Mago");
@@ -62,8 +62,8 @@ public class Main {
 		
 			case 1:
 			
-				System.out.println("Classe Arqueiro selecionada.");
-				System.out.print("Informe o nível de precisão do arqueiro: ");
+				System.out.println("\n===================================\nClasse Arqueiro selecionada.");
+				System.out.print("\nInforme o nível de precisão do arqueiro: ");
 				precisao = scanner.nextInt();
 			
 				personagem = new Arqueiro(nome, pontosDeVida, defesa, defesaMagica, precisao);
@@ -74,8 +74,8 @@ public class Main {
 			
 			case 2:
 			
-				System.out.println("Classe Guerreiro selecionada.");
-				System.out.print("Informe o nível de forca do guerreiro: ");
+				System.out.println("\n===================================\nClasse Guerreiro selecionada.");
+				System.out.print("\nInforme o nível de forca do guerreiro: ");
 				forca = scanner.nextInt();
 			
 				personagem = new Guerreiro(nome, pontosDeVida, defesa, defesaMagica, forca);
@@ -86,8 +86,8 @@ public class Main {
 			
 			case 3:
 			
-				System.out.println("Classe Mago selecionada.");
-				System.out.print("Informe o nivel de poder magico do mago: ");
+				System.out.println("\n===================================\nClasse Mago selecionada.");
+				System.out.print("\nInforme o nivel de poder magico do mago: ");
 				poderMagico = scanner.nextInt();
 			
 				personagem = new Mago(nome, pontosDeVida, defesa, defesaMagica, poderMagico);
@@ -97,7 +97,7 @@ public class Main {
 				break;
 			
 			default:
-				System.out.println("Classe não selecionda.");
+				System.out.println("\n===================================\nClasse não selecionda.");
 				personagemSetado = false;
 		
 		}
@@ -105,7 +105,7 @@ public class Main {
 		if(personagemSetado) {
 			
 			
-			System.out.println("Definição de Inimigo..");
+			System.out.println("\n===================================\nDefinição de Inimigo...\n===================================\n");
 			
 			System.out.print("Informe o valor dos pontos de vida: ");
 			pontosDeVida = scanner.nextInt();
@@ -128,42 +128,45 @@ public class Main {
 			
 				case 1:
 				
-					System.out.println("Classe Esqueleto selecionada.");
-					System.out.print("Informe o nível de resistencia óssea: ");
+					System.out.println("\n===================================\nClasse Esqueleto selecionada.");
+					System.out.print("\nInforme o nível de resistencia óssea: ");
 					resistenciaOssea = scanner.nextInt();
 				
 					inimigo = new Esqueleto(pontosDeVida, defesa, defesaMagica, resistenciaOssea);
 					inimigo.mostrarStatus();
 					inimigoSetado = true;
+					batalha = true;
 				
 					break;
 				
 				case 2:
 				
-					System.out.println("Classe Zumbi Mago selecionada.");
-					System.out.print("Informe o nível de magia sombria: ");
+					System.out.println("\n===================================\nClasse Zumbi Mago selecionada.");
+					System.out.print("\nInforme o nível de magia sombria: ");
 					magiaSombria = scanner.nextInt();
 				
 					inimigo = new ZumbiMago(pontosDeVida, defesa, defesaMagica, magiaSombria);
 					inimigo.mostrarStatus();
 					inimigoSetado = true;
+					batalha = true;
 				
 					break;
 				
 				case 3:
 				
-					System.out.println("Classe Goblin selecionada.");
-					System.out.print("Informe o nivel de agilidade: ");
+					System.out.println("\n===================================\nClasse Goblin selecionada.");
+					System.out.print("\nInforme o nivel de agilidade: ");
 					agilidade = scanner.nextInt();
 				
 					inimigo = new Goblin(pontosDeVida, defesa, defesaMagica, agilidade);
 					inimigo.mostrarStatus();
 					inimigoSetado = true;
+					batalha = true;
 					
 					break;
 				
 				default:
-					System.out.println("Classe não selecionda.");
+					System.out.println("\n===================================\nClasse não selecionda.");
 					inimigoSetado = false;
 			
 			}
@@ -174,13 +177,78 @@ public class Main {
 			
 			Combate combate = new Combate(personagem,inimigo);
 			
+			do{
+			
+				if(personagem.getPontosDeVida() > 0) {
+				
+					System.out.println("\nRolagem de ataque de " + personagem.getNome() + ".");
+					combate.rolagemDeAtaque();
+			
+					if(combate.getAtaque() >= combate.getDefesa()) {
+				
+						System.out.println("\nO ataque foi bem sucedido.");
+						combate.rolagemDanoAtaque();
+				
+						System.out.println("\nStatus do Inimigo:");
+						inimigo.mostrarStatus();
+				
+					}
+					else {
+				
+						System.out.println("\nO ataque falhou.");
+				
+					}
+					
+				}	
+				
+				if(inimigo.getPontosDeVida() > 0) {
+			
+					System.out.println("\nRolagem de contra-ataque.");
+					combate.rolagemContraAtaque();
+			
+					if(combate.getAtaque() >= combate.getDefesa()) {
+				
+						System.out.println("\nO contra-ataque inimigo foi bem sucedido.");
+						combate.rolagemDanoContraAtaque();
+				
+						System.out.println("\nStatus de " + personagem.getNome());
+						personagem.mostrarStatus();
+				
+					}
+					else {
+				
+						System.out.println("\n" + personagem.getNome() + " defendeu o contra-ataque.");
+				
+					}
+				
+				}	
+					
+				if(personagem.getPontosDeVida() == 0 || inimigo.getPontosDeVida() == 0) {
+					
+					if(personagem.getPontosDeVida() == 0) {
+						
+						System.out.println("\n\n" + personagem.getNome() + " foi derrotado.");
+						
+						
+					}
+					
+					if(inimigo.getPontosDeVida() == 0) {
+						
+						System.out.println("\n\n" + personagem.getNome() + " venceu a batalha.");
+						
+					}
+					
+					batalha = false;
+					
+				}				
+					
+			}while(batalha);
+		
+			scanner.close();
+		
 		}
 	
-		scanner.close();
-		
 	}
-	
-
 
 }
 

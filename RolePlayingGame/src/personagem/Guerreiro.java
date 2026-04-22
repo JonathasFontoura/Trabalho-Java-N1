@@ -27,7 +27,7 @@ public class Guerreiro extends Personagem {
 	
 	public void mostrarStatus() {
 		
-		System.out.println("Nome: " + getNome());
+		System.out.println("\nNome: " + getNome());
 		System.out.println("Classe: " + this.getClass().getSimpleName());
 		System.out.println("Pontos de Vida: " + getPontosDeVida());
 		System.out.println("Defesa: " + getDefesa());

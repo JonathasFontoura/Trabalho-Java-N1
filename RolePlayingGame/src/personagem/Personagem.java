@@ -22,7 +22,7 @@ public abstract class Personagem {
 		
 	}
 	
-	public void setPontosdeVida(int pontosDeVida) {
+	public void setPontosDeVida(int pontosDeVida) {
 		
 		this.pontosDeVida = pontosDeVida;
 		
