@@ -154,8 +154,8 @@ public class Combate {
 		}
 			
 		roll = doisD6.nextInt(2, 12);
-		defesaOuDefesaMagica = (classeInimigo.equals("ZumbiMago")) ? personagem.getDefesaMagica() : personagem.getDefesa();
-		textoDefesa = (classePersonagem.equals("ZumbiMago")) ? personagem.getDefesaMagica() + " (defesa mágica) = " : personagem.getDefesa() + " (defesa) = ";
+		defesaOuDefesaMagica = (classePersonagem.equals("Mago")) ? personagem.getDefesaMagica() : personagem.getDefesa();
+		textoDefesa = (classePersonagem.equals("Mago")) ? personagem.getDefesaMagica() + " (defesa mágica) = " : personagem.getDefesa() + " (defesa) = ";
 			
 		System.out.print(">>> DEFESA:" + roll + " (2d6) + " + textoDefesa);
 		this.defesa = roll + defesaOuDefesaMagica;
